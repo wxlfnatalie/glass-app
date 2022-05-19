@@ -7,6 +7,8 @@
 
 import SwiftUI
 let screenWidth = UIScreen.main.bounds.width
+public var gw: CGFloat?
+public var gh: CGFloat?
 
 struct ContentView: View {
     var body: some View {
@@ -60,12 +62,12 @@ struct Content: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("feel confident in\nyour body")
+            Text("title")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
                 .padding(.top)
-            Text("Start now and see results\nin shorter than a month.")
+            Text("descrip.")
                 .font(.system(size: 30, weight: .thin))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -110,7 +112,7 @@ struct Menu: View {
                     .font(.system(size: 70))
                 Image(systemName: "drop")}}
             Button(action:{}) { ZStack {
-                MakeGlass(givenwidth: screenWidth/4, givenheight: screenWidth/4)
+                MakeGlass(width: screenWidth/4, height: screenWidth/4)
                 Image(systemName: "person")}}
             Button(action:{}) {Image(systemName: "camera")}
             Button(action:{}) {Image(systemName: "gear")}
@@ -119,7 +121,11 @@ struct Menu: View {
         .foregroundColor(.white)
     }}
 
-func MakeGlass(givenwidth: CGFloat, givenheight: CGFloat) -> AnyView {
+func MakeGlass(width: CGFloat, height: CGFloat) -> AnyView {
+    gw = width
+    gh = height
+    func OMFG() -> AnyView {
+    
     struct Glass: View {
         var body: some View {
         ZStack {
@@ -141,8 +147,11 @@ func MakeGlass(givenwidth: CGFloat, givenheight: CGFloat) -> AnyView {
                                 lineWidth: 2.5).padding(2))
                         .shadow(color: .black.opacity(0.1), radius: 5, x: -5, y: -5)
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)}
-            .frame(width: screenWidth/4, height: screenWidth/4)}}
+            .frame(width: gw, height: gh)}}
     return AnyView(Glass())
+    }
+    
+    return OMFG()
 }
 
 struct ContentView_Previews: PreviewProvider {
