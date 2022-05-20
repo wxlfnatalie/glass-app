@@ -10,11 +10,54 @@ let screenWidth = UIScreen.main.bounds.width
 public var gw: CGFloat?
 public var gh: CGFloat?
 
+class Glass {
+    
+    var width: CGFloat?
+    var height: CGFloat?
+    
+    init (_ width: CGFloat, _ height: CGFloat) {
+        self.width = width
+        self.height = height
+    }
+    
+    
+}
+func makeGlass (_ glass: Glass) -> AnyView {
+    
+    var body: some View {
+    ZStack {
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color.white)
+            .opacity(0.1)
+            .background(
+                Color.white
+                    .opacity(0.08)
+                    .blur(radius:10))
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(LinearGradient(gradient: Gradient(colors:
+                            [Color.purple,
+                             Color.purple.opacity(0.5),
+                             .clear,
+                             .clear,
+                             Color.blue]), startPoint: .topLeading,endPoint: .bottomTrailing),
+                            lineWidth: 2.5).padding(2))
+                    .shadow(color: .black.opacity(0.1), radius: 5, x: -5, y: -5)
+            .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)
+        
+    }
+    .frame(width: glass.width, height: glass.height)
+        
+    }
+
+return AnyView(body)
+}
+
 struct ContentView: View {
     var body: some View {
         Home()
-        
     }
+    
     
 }
 
@@ -104,7 +147,8 @@ struct Content: View {
 struct Card: View {
     var body: some View {
         Button(action:{}){ZStack {
-            MakeGlass(width: screenWidth / 2, height: 70)
+            let squareGlass = Glass(screenWidth/2, screenWidth/4)
+            makeGlass(squareGlass)
             VStack {
                 Text("START")
                     .foregroundColor(.white)
@@ -114,7 +158,6 @@ struct Card: View {
             }
             
         }
-            .frame(width: screenWidth / 2, height: 70)
         
     }
     
@@ -135,7 +178,8 @@ struct Menu: View {
             }
             Button(action:{}) {
                 ZStack {
-                MakeGlass(width: screenWidth/4, height: screenWidth/4)
+                    let squareGlass = Glass(screenWidth/4, screenWidth/4)
+                    makeGlass(squareGlass)
                 Image(systemName: "person")
                 }
             
@@ -151,40 +195,7 @@ struct Menu: View {
 }
     
 
-func MakeGlass(width: CGFloat, height: CGFloat) -> AnyView {
-    gw = width
-    gh = height
-    
-    struct Glass: View {
-        var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white)
-                .opacity(0.1)
-                .background(
-                    Color.white
-                        .opacity(0.08)
-                        .blur(radius:10))
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(LinearGradient(gradient: Gradient(colors:
-                                [Color.purple,
-                                 Color.purple.opacity(0.5),
-                                 .clear,
-                                 .clear,
-                                 Color.blue]), startPoint: .topLeading,endPoint: .bottomTrailing),
-                                lineWidth: 2.5).padding(2))
-                        .shadow(color: .black.opacity(0.1), radius: 5, x: -5, y: -5)
-                .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)
-            
-        }
-            .frame(width: gw, height: gh)
-            
-        }
-        
-    }
-    return AnyView(Glass())
-    }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
