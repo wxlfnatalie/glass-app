@@ -12,13 +12,23 @@ public var gh: CGFloat?
 
 struct ContentView: View {
     var body: some View {
-        Home()}}
+        Home()
+        
+    }
+    
+}
 
 struct Home: View {
     var body: some View {
         ZStack {
             Background()
-            Content()}}}
+            Content()
+            
+        }
+        
+    }
+    
+}
 
 struct Background: View {
     var body: some View {
@@ -26,7 +36,8 @@ struct Background: View {
             LinearGradient (gradient: Gradient(colors: [Color("BG1"), Color("BG2")]),
                             startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
-            GeometryReader {proxy in
+            GeometryReader {
+                proxy in
                 let size = proxy.size
                 Color.black
                     .opacity(0.7)
@@ -56,7 +67,15 @@ struct Background: View {
                     .fill(Color("Purple"))
                     .padding(100)
                     .blur(radius: 110)
-                    .offset(x: -size.width / 1.8, y: size.height / 2)}}}}
+                    .offset(x: -size.width / 1.8, y: size.height / 2)
+                
+            }
+            
+        }
+        
+    }
+    
+}
 
 struct Content: View {
     var body: some View {
@@ -74,57 +93,67 @@ struct Content: View {
                 .padding(.top)
             Card()
             Spacer()
-            Menu()}}}
+            Menu()
+            
+        }
+        
+    }
+    
+}
 
 struct Card: View {
     var body: some View {
         Button(action:{}){ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white)
-                .opacity(0.1)
-                .background(
-                    Color.white
-                        .opacity(0.08)
-                        .blur(radius:10))
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(LinearGradient(gradient: Gradient(colors:
-                                [Color.purple,
-                                 Color.purple.opacity(0.5),
-                                 .clear,
-                                 .clear,
-                                 Color.blue]), startPoint: .topLeading,endPoint: .bottomTrailing),
-                                lineWidth: 2.5).padding(2))
-                        .shadow(color: .black.opacity(0.1), radius: 5, x: -5, y: -5)
-                        .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)
+            MakeGlass(width: screenWidth / 2, height: 70)
             VStack {
                 Text("START")
                     .foregroundColor(.white)
                     .font(.system(size: 30, weight: .regular))
-                    .multilineTextAlignment(.center)}}
-            .frame(width: screenWidth / 2, height: 70)}}}
+                    .multilineTextAlignment(.center)
+                
+            }
+            
+        }
+            .frame(width: screenWidth / 2, height: 70)
+        
+    }
+    
+}
+}
 
 struct Menu: View {
     var body: some View{
         HStack {
-            Button(action:{}) { ZStack {
+            Button(action:{}) {
+                ZStack {
                 Image(systemName: "circle")
                     .font(.system(size: 70))
-                Image(systemName: "drop")}}
-            Button(action:{}) { ZStack {
+                Image(systemName: "drop")
+                
+                }
+                
+            }
+            Button(action:{}) {
+                ZStack {
                 MakeGlass(width: screenWidth/4, height: screenWidth/4)
-                Image(systemName: "person")}}
+                Image(systemName: "person")
+                }
+            
+            }
             Button(action:{}) {Image(systemName: "camera")}
             Button(action:{}) {Image(systemName: "gear")}
         }
         .font(.system(size: 50, weight: .light))
         .foregroundColor(.white)
-    }}
+        
+    }
+    
+}
+    
 
 func MakeGlass(width: CGFloat, height: CGFloat) -> AnyView {
     gw = width
     gh = height
-    func OMFG() -> AnyView {
     
     struct Glass: View {
         var body: some View {
@@ -146,17 +175,24 @@ func MakeGlass(width: CGFloat, height: CGFloat) -> AnyView {
                                  Color.blue]), startPoint: .topLeading,endPoint: .bottomTrailing),
                                 lineWidth: 2.5).padding(2))
                         .shadow(color: .black.opacity(0.1), radius: 5, x: -5, y: -5)
-                .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)}
-            .frame(width: gw, height: gh)}}
+                .shadow(color: .black.opacity(0.1), radius: 5, x: 5, y: 5)
+            
+        }
+            .frame(width: gw, height: gh)
+            
+        }
+        
+    }
     return AnyView(Glass())
     }
-    
-    return OMFG()
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()}}
+        ContentView()
+        
+    }
+    
+}
 
 
 
